@@ -1,0 +1,6 @@
+customer_email,order_total,order_date,region,product_name
+asha@example.com,1299.50,2026-07-01,North,Analytics Suite
+rahul@example.com,499.00,2026-07-02,West,API Credits
+meera@example.com,2499.99,2026-07-03,South,Enterprise Plan
+dev@example.com,799.00,2026-07-04,East,Workflow Addon
+
