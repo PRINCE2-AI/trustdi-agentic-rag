@@ -208,6 +208,18 @@ POST /match
 | `review_rate` | Share of pairs routed to human review |
 | `external_kb_rate` | Share of decisions using external knowledge lookup |
 
+## Evaluation and observability assets
+
+| Asset | Purpose |
+| --- | --- |
+| [`data/eval_schema_cases.json`](data/eval_schema_cases.json) | 30-case schema matching eval set covering direct, retrieve, agentic verification, external-KB, negative, type-mismatch, and graph-style ambiguity cases |
+| [`docs/evaluation.md`](docs/evaluation.md) | Scoring guide for precision, recall, F1, route accuracy, evidence relevance, review accuracy, and false-positive rate |
+| [`docs/observability.md`](docs/observability.md) | Trace schema, dashboard signals, failure taxonomy, and latency/cost reporting template |
+| [`docs/case_study.md`](docs/case_study.md) | Recruiter-facing explanation of paper-to-product mapping, architecture, tradeoffs, and limitations |
+| [`docs/deployment.md`](docs/deployment.md) | Local, Docker, and Docker Compose run guide |
+
+The included eval set is a benchmark harness seed, not a claim of broad enterprise accuracy. Publish only observed scores from real runs.
+
 ## Project Layout
 
 ```text
@@ -226,7 +238,7 @@ trustdi-agentic-rag/
 |   |-- profiler.py            # CSV schema profiler
 |   `-- ui.py                  # Streamlit dashboard
 |-- data/samples/              # Redistributable demo CSVs
-|-- docs/                      # Architecture, paper notes, resume bullets
+|-- docs/                      # Architecture, paper notes, evals, observability, deployment
 |-- tests/                     # Offline regression tests
 |-- demo.py
 |-- .env.example
