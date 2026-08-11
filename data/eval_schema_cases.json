@@ -1,0 +1,272 @@
+[
+  {
+    "id": "trustdi_direct_001",
+    "source_column": "customer_email",
+    "target_column": "client_email",
+    "expected_match": true,
+    "expected_route": "direct",
+    "expected_evidence": ["email", "customer", "client"],
+    "rationale": "Names and value semantics strongly align."
+  },
+  {
+    "id": "trustdi_direct_002",
+    "source_column": "order_date",
+    "target_column": "purchase_date",
+    "expected_match": true,
+    "expected_route": "direct",
+    "expected_evidence": ["date", "order", "purchase"],
+    "rationale": "Both columns represent transaction date."
+  },
+  {
+    "id": "trustdi_direct_003",
+    "source_column": "product_name",
+    "target_column": "item_title",
+    "expected_match": true,
+    "expected_route": "direct",
+    "expected_evidence": ["product", "item", "title"],
+    "rationale": "Both columns describe the purchased item name."
+  },
+  {
+    "id": "trustdi_direct_004",
+    "source_column": "zip_code",
+    "target_column": "postal_code",
+    "expected_match": true,
+    "expected_route": "direct",
+    "expected_evidence": ["zip", "postal", "address"],
+    "rationale": "Common synonym pair with matching data type."
+  },
+  {
+    "id": "trustdi_direct_005",
+    "source_column": "phone_number",
+    "target_column": "contact_phone",
+    "expected_match": true,
+    "expected_route": "direct",
+    "expected_evidence": ["phone", "contact"],
+    "rationale": "Direct semantic overlap and expected phone-like values."
+  },
+  {
+    "id": "trustdi_retrieve_006",
+    "source_column": "order_total",
+    "target_column": "sales_amount",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["currency", "transaction total", "sales"],
+    "rationale": "Synonyms require business context beyond exact name matching."
+  },
+  {
+    "id": "trustdi_retrieve_007",
+    "source_column": "region",
+    "target_column": "sales_region",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["territory", "sales", "geography"],
+    "rationale": "Short column name benefits from local knowledge notes."
+  },
+  {
+    "id": "trustdi_retrieve_008",
+    "source_column": "sku",
+    "target_column": "product_identifier",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["SKU", "identifier", "product"],
+    "rationale": "Abbreviation should be resolved through evidence."
+  },
+  {
+    "id": "trustdi_retrieve_009",
+    "source_column": "acct_id",
+    "target_column": "account_identifier",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["account", "identifier", "abbreviation"],
+    "rationale": "Abbreviated naming needs semantic expansion."
+  },
+  {
+    "id": "trustdi_retrieve_010",
+    "source_column": "net_revenue",
+    "target_column": "revenue_after_discounts",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["net", "discounts", "revenue"],
+    "rationale": "Financial meaning requires business evidence."
+  },
+  {
+    "id": "trustdi_agentic_011",
+    "source_column": "amount",
+    "target_column": "sales_amount",
+    "expected_match": "ambiguous",
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["amount", "transaction", "currency", "ambiguous"],
+    "rationale": "Generic source name should not be accepted without value/profile evidence."
+  },
+  {
+    "id": "trustdi_agentic_012",
+    "source_column": "date",
+    "target_column": "purchase_date",
+    "expected_match": "ambiguous",
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["date", "generic", "purchase"],
+    "rationale": "Generic date column could mean created, updated, shipped, or purchased date."
+  },
+  {
+    "id": "trustdi_agentic_013",
+    "source_column": "status",
+    "target_column": "order_status",
+    "expected_match": "ambiguous",
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["status", "order lifecycle", "values"],
+    "rationale": "Needs value examples such as shipped, pending, cancelled."
+  },
+  {
+    "id": "trustdi_agentic_014",
+    "source_column": "id",
+    "target_column": "customer_id",
+    "expected_match": "ambiguous",
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["generic id", "customer", "profile"],
+    "rationale": "Generic id must be disambiguated from order, product, and account identifiers."
+  },
+  {
+    "id": "trustdi_agentic_015",
+    "source_column": "score",
+    "target_column": "lead_score",
+    "expected_match": "ambiguous",
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["score", "lead", "range"],
+    "rationale": "Requires context about score meaning and expected values."
+  },
+  {
+    "id": "trustdi_negative_016",
+    "source_column": "customer_email",
+    "target_column": "order_total",
+    "expected_match": false,
+    "expected_route": "direct",
+    "expected_evidence": ["email", "currency", "type mismatch"],
+    "rationale": "Clear semantic and data-type mismatch."
+  },
+  {
+    "id": "trustdi_negative_017",
+    "source_column": "birth_date",
+    "target_column": "purchase_date",
+    "expected_match": false,
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["date", "person", "transaction"],
+    "rationale": "Same data type but different entity meaning."
+  },
+  {
+    "id": "trustdi_negative_018",
+    "source_column": "employee_id",
+    "target_column": "customer_id",
+    "expected_match": false,
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["employee", "customer", "identifier"],
+    "rationale": "Both are identifiers but refer to different entities."
+  },
+  {
+    "id": "trustdi_negative_019",
+    "source_column": "shipping_city",
+    "target_column": "billing_city",
+    "expected_match": false,
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["shipping", "billing", "address role"],
+    "rationale": "Similar address fields but different business role."
+  },
+  {
+    "id": "trustdi_negative_020",
+    "source_column": "gross_revenue",
+    "target_column": "net_revenue",
+    "expected_match": false,
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["gross", "net", "discounts"],
+    "rationale": "Related financial terms are not interchangeable."
+  },
+  {
+    "id": "trustdi_external_021",
+    "source_column": "isin",
+    "target_column": "security_identifier",
+    "expected_match": true,
+    "expected_route": "external_kb",
+    "expected_evidence": ["ISIN", "security", "identifier"],
+    "rationale": "Domain abbreviation may require external financial knowledge."
+  },
+  {
+    "id": "trustdi_external_022",
+    "source_column": "npi",
+    "target_column": "provider_identifier",
+    "expected_match": true,
+    "expected_route": "external_kb",
+    "expected_evidence": ["NPI", "healthcare", "provider"],
+    "rationale": "Healthcare abbreviation benefits from external KB evidence."
+  },
+  {
+    "id": "trustdi_external_023",
+    "source_column": "gtin",
+    "target_column": "global_trade_item_number",
+    "expected_match": true,
+    "expected_route": "external_kb",
+    "expected_evidence": ["GTIN", "trade item", "identifier"],
+    "rationale": "Acronym expansion should be evidence-backed."
+  },
+  {
+    "id": "trustdi_type_024",
+    "source_column": "quantity",
+    "target_column": "units_sold",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["integer", "units", "sold"],
+    "rationale": "Numeric field match depends on business context."
+  },
+  {
+    "id": "trustdi_type_025",
+    "source_column": "discount_pct",
+    "target_column": "discount_rate",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["percentage", "rate", "discount"],
+    "rationale": "Abbreviation and naming differ but units align."
+  },
+  {
+    "id": "trustdi_type_026",
+    "source_column": "discount_amount",
+    "target_column": "discount_rate",
+    "expected_match": false,
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["amount", "rate", "unit mismatch"],
+    "rationale": "Both mention discount but one is currency and one is percentage."
+  },
+  {
+    "id": "trustdi_graph_027",
+    "source_column": "account_owner_email",
+    "target_column": "sales_rep_email",
+    "expected_match": "ambiguous",
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["owner", "sales rep", "email", "relationship"],
+    "rationale": "May match only if account owner means sales representative in this system."
+  },
+  {
+    "id": "trustdi_graph_028",
+    "source_column": "parent_account_id",
+    "target_column": "account_id",
+    "expected_match": false,
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["parent", "account", "hierarchy"],
+    "rationale": "Hierarchical relationship differs from entity identity."
+  },
+  {
+    "id": "trustdi_graph_029",
+    "source_column": "last_contacted_at",
+    "target_column": "last_activity_date",
+    "expected_match": "ambiguous",
+    "expected_route": "agentic_verify",
+    "expected_evidence": ["contact", "activity", "timestamp"],
+    "rationale": "Could match if activity is defined as contact; otherwise too broad."
+  },
+  {
+    "id": "trustdi_graph_030",
+    "source_column": "churn_risk_score",
+    "target_column": "retention_risk",
+    "expected_match": true,
+    "expected_route": "retrieve",
+    "expected_evidence": ["churn", "retention", "risk score"],
+    "rationale": "Opposite framing but same customer-risk concept."
+  }
+]
